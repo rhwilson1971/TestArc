@@ -11,14 +11,19 @@ namespace Utilities.Drawing
 
     public class DrawScript : MonoBehaviour
     {
-        string settingsFile = @"";
+
         public Transform p0;
         public Transform p1;
         public Transform p2;
+        public float totalLineWidth = 0.10f;
 
+        #region Private Variables
+        string settingsFile = @"";
         Dictionary<string, Vector3> _positions = new Dictionary<string, Vector3>();
 
         private LineRenderer lineRenderer;
+        #endregion
+
         // Start is called before the first frame update
         void Start()
         {
@@ -33,15 +38,14 @@ namespace Utilities.Drawing
                 _positions[key] = p1.position;
             else 
                 _positions.Add(key, p1.position);
-
-            // var data = "";
-
-            // System.IO.File.AppendAllLines(data, settingsFile);
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (lineRenderer == null)
+                return;
+
             DrawQuadraticBezierCurve(p0.position, p1.position, p2.position);
         }
 

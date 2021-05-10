@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// https://www.codinblack.com/how-to-draw-lines-circles-or-anything-else-using-linerenderer/
+// Ismail Camonu 
+// This code was modified based on the above tutorial
 
 namespace Utilities.Drawing 
 {
 
-    
-
     public class DrawScript : MonoBehaviour
     {
+        string settingsFile = @"";
         public Transform p0;
         public Transform p1;
         public Transform p2;
@@ -31,6 +33,10 @@ namespace Utilities.Drawing
                 _positions[key] = p1.position;
             else 
                 _positions.Add(key, p1.position);
+
+            // var data = "";
+
+            // System.IO.File.AppendAllLines(data, settingsFile);
         }
 
         // Update is called once per frame
@@ -42,6 +48,9 @@ namespace Utilities.Drawing
         void DrawQuadraticBezierCurve(Vector3 point0, Vector3 point1, Vector3 point2)
         {
             lineRenderer.positionCount = 200;
+            lineRenderer.startWidth = 0.02f;
+            lineRenderer.endWidth = 0.02f;
+            lineRenderer.loop = false;
             float t = 0f;
             Vector3 B = new Vector3(0, 0, 0);
 
@@ -100,5 +109,4 @@ namespace Utilities.Drawing
             }
         }
     }
-
 }
